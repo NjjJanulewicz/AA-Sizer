@@ -7,6 +7,7 @@ class Pdf:
     def __init__(self, images):
         self.images = images
         self.font_size = 12
+        self.out = "out/sizes.pdf"
 
     def write_report(self):
         document = FPDF()
@@ -22,4 +23,4 @@ class Pdf:
                     document.cell(txt=item)
                     document.ln()
             document.ln(24)
-        document.output("out/sizes.pdf")
+        document.output(self.out)

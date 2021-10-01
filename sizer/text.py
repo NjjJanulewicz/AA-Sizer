@@ -1,5 +1,7 @@
 from properties import Properties
 
+OUT = "./out/sizes.txt"
+
 
 class Text:
     def __init__(self, images):

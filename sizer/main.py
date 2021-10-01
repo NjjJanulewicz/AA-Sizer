@@ -68,15 +68,20 @@ def main():
                       "\nusage: Sizer will decompile and gather information on all .img's in a SlotC project"
                       "\n\nCommands"
                       "\n\t%10s: lists all the available commands"
+                      "\n\t%10s: List data for all images in a SlotC project to out/sizes.pdf"
                       "\n\t%10s: List data for all images in a SlotC project to out/sizes.txt"
                       "\n\t%10s: Converts "
                       "\n\t%10s: exits the program"
                       "\n"
-                  ) % ("help", "size", "convert", "quit"))
-        elif re.match("(size)", user_in):
+                  ) % ("help", "pdf", "txt", "convert", "quit"))
+        elif re.match("(pdf)", user_in):
             print("writing sizes to out/sizes.txt")
-            convert_img()
+            # convert_img()
             pdf.write_report()
+        elif re.match("(txt)", user_in):
+            print("writing sizes to out/sizes.txt")
+            # convert_img()
+            text.write_report()
         elif re.match("convert", user_in):
             print("creating pngs in rc")
             convert_img()

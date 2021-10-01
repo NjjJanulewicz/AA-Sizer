@@ -1,3 +1,4 @@
+import os
 from properties import Properties
 from fpdf import FPDF
 
@@ -5,6 +6,7 @@ from fpdf import FPDF
 class Pdf:
     def __init__(self, images):
         self.images = images
+        self.font_size = 12
 
     def write_report(self):
         document = FPDF()
@@ -12,10 +14,12 @@ class Pdf:
         for image in self.images:
             prop = Properties(image)
             document.set_font('helvetica', size=12)
-            for item in prop.to_string().split("\n"):
+            document.cell(txt=prop.name, border=1, align="C",
+                          link=f'file:///{os.path.dirname(os.path.realpath(__file__))}/{image[:len(image) - 3]}png')
+            document.ln()
+            for item in prop.to_string().split("\n")[1:]:
                 if item:
                     document.cell(txt=item)
                     document.ln()
-            document.image(image, x=20, y=60, alt_text="Snake logo of the fpdf2 library")
             document.ln(24)
         document.output("out/sizes.pdf")

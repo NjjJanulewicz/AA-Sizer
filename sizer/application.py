@@ -5,6 +5,7 @@ import subprocess
 
 import tkinter as tk
 from tkinter import filedialog as fd
+from tkinter import messagebox
 
 from pdf import Pdf
 from text import Text
@@ -29,14 +30,15 @@ class Application(tk.Frame):
         self.dialog = self.create_filedialog()
         self.checkboxes = self.create_checkboxes()
         self.size = self.create_size_btn()
+        self.convert = self.create_convert_btn()
 
     def create_convert_btn(self):
-        return 1
+        btn = tk.Button(text="convert", command=self.convert_img)
+        btn.pack(side="top")
+        return btn
 
     def create_size_btn(self):
-        btn = tk.Button()
-        btn["text"] = "write"
-        btn["command"] = self.write
+        btn = tk.Button(text="write", command=self.write)
         btn.pack(side="top")
         return btn
 
@@ -62,9 +64,7 @@ class Application(tk.Frame):
         TODO: get return value from dialog
         TODO: way to set the command to return value so i can initially define the self directory in init.
         """
-        dialog = tk.Button()
-        dialog["text"] = "Open a file"
-        dialog["command"] = self.select_directory
+        dialog = tk.Button(text="Open a file", command=self.select_directory)
         dialog.pack(side="top")
         return dialog
 
@@ -79,6 +79,7 @@ class Application(tk.Frame):
                                 stdout=subprocess.PIPE, shell=True)
 
             if cp.returncode != 0:
+                messagebox.showerror("Title", "error stopping conversion")
                 print("error stopping conversion")
                 break
 
@@ -110,6 +111,7 @@ class Application(tk.Frame):
                     self.gather_images(path + "/" + entry.name)
         except FileNotFoundError as error:
             status = 0
+            messagebox.showerror("Title", f'Error opening rc folder: {error}')
             print("Error opening rc folder:", error)
 
         return status

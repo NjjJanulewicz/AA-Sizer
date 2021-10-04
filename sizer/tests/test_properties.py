@@ -1,4 +1,5 @@
 import unittest
+
 from .context import properties
 
 IMAGE = "25bttn.img"

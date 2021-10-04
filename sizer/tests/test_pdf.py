@@ -1,7 +1,8 @@
 import unittest
 import os
+
 from .context import pdf
-from sizer.main import images
+from sizer.__main__ import images
 
 
 class TestPdf(unittest.TestCase):

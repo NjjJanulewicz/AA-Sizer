@@ -1,7 +1,8 @@
 import unittest
 import os
+
 from .context import text
-from sizer.main import images
+from sizer.__main__ import images
 
 
 class TestText(unittest.TestCase):

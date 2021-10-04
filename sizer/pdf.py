@@ -1,13 +1,16 @@
 import os
-from properties import Properties
+
 from fpdf import FPDF
+
+from properties import Properties
+
 
 
 class Pdf:
     def __init__(self, images):
         self.images = images
         self.font_size = 12
-        self.out = "out/sizes.pdf"
+        self.out = "sizes.pdf"
 
     def write_report(self):
         document = FPDF()
